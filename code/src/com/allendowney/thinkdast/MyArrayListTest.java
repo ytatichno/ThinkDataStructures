@@ -34,6 +34,7 @@ public class MyArrayListTest {
 
 		mylist = new MyArrayList<Integer>();
 		mylist.addAll(list);
+
 	}
 
 	/**
@@ -245,7 +246,6 @@ public class MyArrayListTest {
 
 		val = mylist.set(0, 6);
 		assertThat(val, is(new Integer(1)));
-
 		val = mylist.set(2, 7);
 		assertThat(val, is(new Integer(3)));
 
