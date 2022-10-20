@@ -35,12 +35,31 @@ public class MyArrayList<T> implements List<T> {
         mal.add(1);
         mal.add(2);
         mal.add(3);
+        mal.add(4);
+        //mal.shiftL(1,3,1);
+        mal.remove(2);
         System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
 
         mal.remove(new Integer(2));
         System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
     }
 
+    private boolean shiftL(int start, int end, int repeat){
+        if (start - repeat<0) array = null;
+        if ((start<0)||(end<0))
+            throw new IndexOutOfBoundsException();
+        size-=repeat;
+        if (repeat>0) {
+            for (int i = start; i <= end; i++) {
+                array[i - repeat] = array[i];
+            }
+        } else {
+            for (int i = end; i >= start; i--) {
+                array[i - repeat] = array[i];
+            }
+        }
+        return true;
+    }
     @Override
     public boolean add(T element) {
         if (size >= array.length) {
@@ -192,8 +211,9 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public T remove(int index) {
-        // TODO: FILL THIS IN!
-        return null;
+        T buff= array[index];
+        shiftL(index+1,size-1,1);
+        return buff;
     }
 
     @Override
