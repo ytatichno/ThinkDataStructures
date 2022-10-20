@@ -14,9 +14,9 @@ public class ProfileListAdd {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		profileArrayListAddEnd();
+		//profileArrayListAddEnd();
 		//profileArrayListAddBeginning();
-		//profileLinkedListAddBeginning();
+		profileLinkedListAddBeginning();
 		//profileLinkedListAddEnd();
 	}
 
@@ -28,7 +28,7 @@ public class ProfileListAdd {
 			List<String> list;
 
 			public void setup(int n) {
-				list = new ArrayList<String>();
+				list = new MyArrayList<String>();
 			}
 
 			public void timeMe(int n) {
@@ -37,7 +37,7 @@ public class ProfileListAdd {
 				}
 			}
 		};
-		int startN = 4000;
+		int startN = 2000;
 		int endMillis = 1000;
 		runProfiler("ArrayList add end", timeable, startN, endMillis);
 	}
@@ -46,21 +46,63 @@ public class ProfileListAdd {
 	 * Characterize the run time of adding to the beginning of an ArrayList
 	 */
 	public static void profileArrayListAddBeginning() {
-		// TODO: FILL THIS IN!
+		Timeable timeable = new Timeable() {
+			List<String> list;
+			@Override
+			public void setup(int n) {
+				list = new MyArrayList<String>();
+			}
+
+			@Override
+			public void timeMe(int n) {
+				for(int i=0;i<n;++i)
+					list.add(0,"random String");
+			}
+		};
+		int startN = 2000;
+		int endMillis = 1000;
+		runProfiler("ArrayList add beginning",timeable,startN,endMillis);
 	}
 
 	/**
 	 * Characterize the run time of adding to the beginning of a LinkedList
 	 */
 	public static void profileLinkedListAddBeginning() {
-		// TODO: FILL THIS IN!
+		Timeable timeable = new Timeable() {
+			List<String> list;
+			public void setup(int n){
+				list=new MyLinkedList<String>();
+			}
+			public void timeMe(int n){
+				for(int i=0; i<n;++i)
+					list.add(0,"string");
+			}
+		};
+		int startN = 256000;
+		int endMillis = 8000;
+		runProfiler("LinkedList add beginning", timeable,startN,endMillis);
 	}
 
 	/**
 	 * Characterize the run time of adding to the end of a LinkedList
 	 */
 	public static void profileLinkedListAddEnd() {
-		// TODO: FILL THIS IN!
+		Timeable timeable = new Timeable() {
+			List<String> list;
+			@Override
+			public void setup(int n) {
+				list = new MyLinkedList<String>();
+			}
+
+			@Override
+			public void timeMe(int n) {
+				for(int i =0; i<n;++i)
+					list.add("ye String");
+			}
+		};
+		int startN = 2000;
+		int endMillis = 8000;
+		runProfiler("LinkedList add end",timeable,startN,endMillis);
 	}
 
 	/**
